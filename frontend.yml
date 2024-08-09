@@ -1,0 +1,25 @@
+#install nginx
+dnf install nginx -y
+#start the service
+systemctl enable nginx
+systemctl start nginx
+#clear the default content 
+rm-rf usr/share/nginx/html/*
+#download the content 
+curl -o /tmp/frontend.zip https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip
+  #extract in this location 
+cd usr/share/nginx/html
+#extract 
+unzip /tmp/frontend.zip
+#reverse proxy to connect with backend
+vi etc/nginx/default.d/expense.conf
+  proxy_http_version 1.1;
+  
+  location /api/ { proxy_pass http://localhost:8080/; }
+  
+  location /health {
+  stub_status on;
+  access_log off;
+}
+#restart nginx
+systemctl restart nginx
