@@ -16,8 +16,8 @@
       ansible.builtin.file:
         path: /usr/share/nginx/html
         state: absent
-    - name: download frontend content
 
+    - name: download frontend content
       ansible.builtin.unarchive:
       src: https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip
       dest: /usr/share/nginx/html
