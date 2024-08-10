@@ -1,0 +1,11 @@
+[Unit]
+Description= Backend Service
+
+[service]
+User=expense
+Environment=Db_HOST="msql-dev.angadicnc.online"
+ExecStart=/bin/node /app/index.js
+SyslogIdentfier=backend
+
+[install]
+WantedBy=multi-user.target
