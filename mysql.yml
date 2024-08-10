@@ -8,6 +8,13 @@
         name: mysql-server
         state: installed
 
+    - name: Install Python MySQL Client
+      ansible.builtin.pip:
+        name:
+          - PyMySQL
+          - cryptography
+        executable: pip3.9
+
     - name: start mysql service
       ansible.builtin.systemd_service:
         name: mysqld
