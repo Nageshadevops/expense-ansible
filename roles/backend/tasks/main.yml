@@ -1,0 +1,52 @@
+- name: disable nodejs
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: enable nodejs 20v
+  ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+- name: install nodejs
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installed
+
+- name: Add user
+  ansible.builtin.user:
+    name: expense
+
+- name: Download Nodejs dependencies
+  community.general.npm:
+    path: /app
+    state: latest
+
+- name: Import App Pre Requisites
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-pre-req
+
+- name: copy backend.service file
+  ansible.builtin.copy:
+    src: backend.service
+    dest: /etc/systemd/system/backend.service
+
+- name: Install Python MySQL Client
+  ansible.builtin.pip:
+    name:
+      - PyMySQL
+      - cryptography
+    executable: pip3.11
+
+- name: Load schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/schema/backend.sql
+    login_user: root
+    login_password: ExpenseApp@1
+    login_host: mysql-dev.angadicnc.online
+
+- name: start backend service
+  ansible.builtin.systemd_service:
+    name: backend
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
