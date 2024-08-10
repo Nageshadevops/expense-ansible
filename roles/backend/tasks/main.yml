@@ -13,15 +13,15 @@
   ansible.builtin.user:
     name: expense
 
-- name: Download Nodejs dependencies
-  community.general.npm:
-    path: /app
-    state: latest
-
 - name: Import App Pre Requisites
   ansible.builtin.import_role:
     name: common
     tasks_from: app-pre-req
+
+- name: Download Nodejs dependencies
+  community.general.npm:
+    path: /app
+    state: latest
 
 - name: copy backend.service file
   ansible.builtin.copy:
