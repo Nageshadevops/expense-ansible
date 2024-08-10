@@ -7,7 +7,7 @@
         name: nginx
         state: latest
 
-    - name: copy nginx configuration
+    - name: copy Expense nginx configuration
       ansible.builtin.copy:
         src: expense.conf
         dest: /etc/nginx/default.d/expense.conf
@@ -16,6 +16,11 @@
       ansible.builtin.file:
         path: /usr/share/nginx/html
         state: absent
+
+    - name: create app directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
 
     - name: download frontend content
       ansible.builtin.unarchive:
