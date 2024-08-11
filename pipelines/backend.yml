@@ -24,49 +24,49 @@ pipelines:
                       - frontend
                     command: bash #bash ansible.sh frontend
                     run_if: passed
-#      - QA:
-#          fetch_materials: true
-#          approval:
-#            type: success
-#            allow_only_on_success: false
-#          jobs:
-#            ansible-playbook:
-#              timeout: 0
-#              tasks:
-#                - exec:
-#                    arguments:
-#                      - ansible.sh
-#                      - frontend
-#                    command: bash #bash ansible.sh frontend
-#                    run_if: passed
-#      - Stage:
-#          fetch_materials: true
-#          approval:
-#            type: success
-#            allow_only_on_success: false
-#          jobs:
-#            ansible-playbook:
-#              timeout: 0
-#              tasks:
-#                - exec:
-#                    arguments:
-#                      - ansible.sh
-#                      - frontend
-#                    command: bash #bash ansible.sh frontend
-#                    run_if: passed
-#      - PROD:
-#          fetch_materials: true
-#          approval:
-#            type: success
-#            allow_only_on_success: false
-#          jobs:
-#            ansible-playbook:
-#              timeout: 0
-#              tasks:
-#                - exec:
-#                    arguments:
-#                      - ansible.sh
-#                      - frontend
-#                    command: bash #bash ansible.sh frontend
-#                    run_if: passed
-#
+      - QA:
+          fetch_materials: true
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            ansible-playbook:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - frontend
+                    command: bash #bash ansible.sh frontend
+                    run_if: passed
+      - Stage:
+          fetch_materials: true
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            ansible-playbook:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - frontend
+                    command: bash #bash ansible.sh frontend
+                    run_if: passed
+      - PROD:
+          fetch_materials: true
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            ansible-playbook:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - frontend
+                    command: bash #bash ansible.sh frontend
+                    run_if: passed
+
