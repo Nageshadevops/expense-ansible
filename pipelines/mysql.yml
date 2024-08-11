@@ -11,6 +11,8 @@ pipelines:
     stages:
       - Dev:
           fetch_materials: true
+          environment_variables:
+            env= dev
           approval:
             type: success
             allow_only_on_success: false
@@ -21,11 +23,13 @@ pipelines:
                 - exec:
                     arguments:
                       - ansible.sh
-                      - frontend
-                    command: bash #bash ansible.sh frontend
+                      - mysql
+                    command: bash #bash ansible.sh mysql
                     run_if: passed
       - QA:
           fetch_materials: true
+          environment_variables:
+            env= qa
           approval:
             type: success
             allow_only_on_success: false
@@ -36,11 +40,13 @@ pipelines:
                 - exec:
                     arguments:
                       - ansible.sh
-                      - frontend
-                    command: bash #bash ansible.sh frontend
+                      - mysql
+                    command: bash #bash ansible.sh mysql
                     run_if: passed
       - Stage:
           fetch_materials: true
+          environment_variables:
+            env= stage
           approval:
             type: success
             allow_only_on_success: false
@@ -51,11 +57,13 @@ pipelines:
                 - exec:
                     arguments:
                       - ansible.sh
-                      - frontend
-                    command: bash #bash ansible.sh frontend
+                      - mysql
+                    command: bash #bash ansible.sh mysql
                     run_if: passed
       - PROD:
           fetch_materials: true
+          environment_variables:
+            env= prod
           approval:
             type: success
             allow_only_on_success: false
@@ -66,7 +74,7 @@ pipelines:
                 - exec:
                     arguments:
                       - ansible.sh
-                      - frontend
-                    command: bash #bash ansible.sh frontend
+                      - mysql
+                    command: bash #bash ansible.sh mysql
                     run_if: passed
 
