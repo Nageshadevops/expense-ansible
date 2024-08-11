@@ -3,22 +3,20 @@ pipelines:
   frontend:
     group: defaultGroup
     materials:
-      git-1c78e63:
+      git-da613e5:
         git: https://github.com/Nageshadevops/expense-ansible.git
         shallow_clone: false
         auto_update: true
         branch: main
     stages:
-      - Dev:
+      - DEV:
           fetch_materials: true
           environment_variables:
             env: dev
           approval:
-            type: success
-            allow_only_on_success: false
+            type: manual
           jobs:
             ansible-playbook:
-              timeout: 0
               tasks:
                 - exec:
                     arguments:
@@ -31,11 +29,9 @@ pipelines:
           environment_variables:
             env: qa
           approval:
-            type: success
-            allow_only_on_success: false
+            type: manual
           jobs:
             ansible-playbook:
-              timeout: 0
               tasks:
                 - exec:
                     arguments:
@@ -43,16 +39,15 @@ pipelines:
                       - frontend
                     command: bash #bash ansible.sh frontend
                     run_if: passed
-      - Stage:
+
+      - STAGE:
           fetch_materials: true
           environment_variables:
             env: stage
           approval:
-            type: success
-            allow_only_on_success: false
+            type: manual
           jobs:
             ansible-playbook:
-              timeout: 0
               tasks:
                 - exec:
                     arguments:
@@ -65,11 +60,9 @@ pipelines:
           environment_variables:
             env: prod
           approval:
-            type: success
-            allow_only_on_success: false
+            type: manual
           jobs:
             ansible-playbook:
-              timeout: 0
               tasks:
                 - exec:
                     arguments:
@@ -77,4 +70,3 @@ pipelines:
                       - frontend
                     command: bash #bash ansible.sh frontend
                     run_if: passed
-
