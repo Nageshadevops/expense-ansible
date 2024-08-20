@@ -3,13 +3,17 @@
     path: "{{ app_loc }}"
     state: absent
 
-- name: make a directory
+- name: Create App Directory
   ansible.builtin.file:
     path: "{{ app_loc }}"
     state: directory
+    owner: "{{app_user}}"
+    group: "{{app_user}}"
 
-- name: download and extract backend content
+- name: Download and Extract App Content
   ansible.builtin.unarchive:
     src: https://expense-artifacts.s3.amazonaws.com/expense-{{ component }}-v2.zip
     dest: "{{ app_loc }}"
     remote_src: yes
+    owner: "{{app_user}}"
+    group: "{{app_user}}"
