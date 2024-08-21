@@ -3,7 +3,7 @@ pipelines:
   frontend:
     group: defaultGroup
     materials:
-      git-da613e5:
+      git-1c78e63:
         git: https://github.com/Nageshadevops/expense-ansible.git
         shallow_clone: false
         auto_update: true
