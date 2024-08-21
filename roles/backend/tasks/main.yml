@@ -11,7 +11,7 @@
 
 - name: Adding Application User
   ansible.builtin.user:
-    name: expense
+    name: "{{app_user}}"
 
 - name: Import App Pre Requisites
   ansible.builtin.import_role:
@@ -33,7 +33,7 @@
     name:
       - PyMySQL
       - cryptography
-    executable: pip3.11
+    executable: pip3.9
 
 - name: Install MySQL Client
   ansible.builtin.dnf:
@@ -46,8 +46,8 @@
     name: all
     target: /app/schema/backend.sql
     login_user: root
-    login_password: ExpenseApp@1
-    login_host: mysql-dev.angadicnc.online
+    login_password: "{{mysql_root_password}}"
+    login_host: mysql-{{env}}.angadicnc.online
 
 - name: Import NewRelic NodeJS Setup
   ansible.builtin.import_role:
