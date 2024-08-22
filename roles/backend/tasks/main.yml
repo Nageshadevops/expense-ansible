@@ -31,7 +31,8 @@
 - name: Install Python MySQL Client
   ansible.builtin.pip:
     name:
-      - mysqlclient
+      - PyMySQL
+      - cryptography
     executable: pip3.9
 
 - name: Install MySQL Client
