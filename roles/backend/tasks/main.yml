@@ -41,13 +41,16 @@
     state: installed
 
 - name: Load Schema
-  community.mysql.mysql_db:
-    state: import
-    name: all
-    target: /app/schema/backend.sql
-    login_user: root
-    login_password: "{{mysql_root_password}}"
-    login_host: mysql-{{env}}.angadicnc.online
+  ansible.builtin.shell: mysql -h mysql-{{env}}.angadicnc.online -uroot -p{{mysql_root_password}} < /app/schema/backend.sql
+
+#- name: Load Schema
+#  community.mysql.mysql_db:
+#    state: import
+#    name: all
+#    target: /app/schema/backend.sql
+#    login_user: root
+#    login_password: "{{mysql_root_password}}"
+#    login_host: mysql-{{env}}.angadicnc.online
 
 - name: Import NewRelic NodeJS Setup
   ansible.builtin.import_role:
