@@ -33,7 +33,7 @@
     name:
       - PyMySQL
       - cryptography
-    executable: pip3.9
+    executable: pip3.11
 
 - name: Install MySQL Client
   ansible.builtin.dnf:
@@ -43,18 +43,18 @@
 #- name: Load Schema
 #  ansible.builtin.shell: mysql -h mysql-{{env}}.angadicnc.online -uroot -p{{mysql_root_password}} < /app/schema/backend.sql
 
-- name: Load Schema
-  ansible.builtin.shell: mysql -h {{ rds_endpoint }} -u {{ rds_username }} -p{{ rds_password }} < /app/schema/backend.sql
-#  ansible.builtin.shell: msql -h mysql-{{env}}.angadicnc.online -u {{ rds_username }} -p{{ rds_password }} < /app/schema/backend.sql
-
 #- name: Load Schema
-#  community.mysql.mysql_db:
-#    state: import
-#    name: all
-#    target: /app/schema/backend.sql
-#    login_user: "{{rds_username}}"
-#    login_password: "{{rds_password}}"
-#    login_host: "{{ rds_endpoint }}"
+#  ansible.builtin.shell: mysql -h {{ rds_endpoint }} -u {{ rds_username }} -p{{ rds_password }} < /app/schema/backend.sql
+##  ansible.builtin.shell: msql -h mysql-{{env}}.angadicnc.online -u {{ rds_username }} -p{{ rds_password }} < /app/schema/backend.sql
+
+- name: Load Schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/schema/backend.sql
+    login_user: "{{rds_username}}"
+    login_password: "{{rds_password}}"
+    login_host: "{{ rds_endpoint }}"
 
 #- name: Load Schema
 #  community.mysql.mysql_db:
