@@ -2,6 +2,7 @@ format_version: 10
 pipelines:
   frontend:
     group: defaultGroup
+    label_template: "${env:APP_VERSION}"
     materials:
       git-1c78e63:
         git: https://github.com/Nageshadevops/expense-ansible.git
@@ -10,6 +11,8 @@ pipelines:
         branch: main
     secure_variables:
       vault_token: AES:5JMtmuKuivytubqEi0BymQ==:AHNrVFOjkZHo78ED+fJgvYJKKPP8nGg+EK4Dbnf/1rE=
+    environment_variables:
+      APP_VERSION: ""
     stages:
       - DEV:
           fetch_materials: true
