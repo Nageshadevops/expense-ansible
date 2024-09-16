@@ -43,6 +43,7 @@
   ansible.builtin.template:
     src: Caddyfile
     dest: "{{app_loc}}/Caddyfile"
+    mode: '0644'
 
 - name: Copy Caddy service file
   ansible.builtin.template:
